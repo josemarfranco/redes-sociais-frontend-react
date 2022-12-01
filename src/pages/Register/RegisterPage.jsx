@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Navigate } from 'react-router-dom'
 
 export default class Register extends React.Component {
     constructor(props) {
@@ -13,7 +14,8 @@ export default class Register extends React.Component {
             name: '',
             surname: '',
             dob: '',
-            password: ''
+            password: '',
+            isCreated: false
         }
     }
     handleChange(event) {
@@ -25,9 +27,10 @@ export default class Register extends React.Component {
     handleSubmit(event) {
         event.preventDefault()
         axios.post("/users/create", this.state, {headers: {'content-type': 'multipart/form-data'}}).then((res) => {
-            alert(res.message)
+            alert(res.data.message)
+            this.setState({isCreated: true})
         }).catch((error) => {
-            alert(error.message)
+            alert(error.response.data.message)
         })
     }
     render() {
@@ -53,6 +56,7 @@ export default class Register extends React.Component {
                             <label htmlFor="password">Confirmação da senha</label><br/>
                             <input className="standard-input" name="password" type="password" value={this.state.password} onChange={this.handleChange}/><br/><br/>
                             <button className="standard-button" type="submit">Criar conta</button><br/>
+                            {this.state.isCreated && <Navigate to="/login"/>}
                             <a href="/"><small>Voltar</small></a>
                         </form>
                     </div>
