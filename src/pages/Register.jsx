@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import registerStyles from "../features/register/Register.module.css";
+import commonStyles from "../features/common/Common.module.css";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [newUser, setNewUser] = React.useState({
@@ -40,10 +42,10 @@ export default function Register() {
   };
 
   return (
-    <div className="standard-flex-container">
-      <div className="standard-left-panel" />
-      <div className="standard-right-panel">
-        <form className="standard-form fade-in" onSubmit={handleSubmit}>
+    <div className={registerStyles["container"]}>
+      <div className={registerStyles["left-panel"]} />
+      <div className={registerStyles["right-panel"]}>
+        <form className={registerStyles["form"]} onSubmit={handleSubmit}>
           <h2>Cadastro</h2>
           <br />
           <label htmlFor="profilePic">Foto</label>
@@ -54,7 +56,7 @@ export default function Register() {
           <label htmlFor="email">Email</label>
           <br />
           <input
-            className="standard-input"
+            className={commonStyles["standard-input"]}
             name="email"
             type="text"
             value={newUser.email}
@@ -65,7 +67,7 @@ export default function Register() {
           <label htmlFor="name">Nome</label>
           <br />
           <input
-            className="standard-input"
+            className={commonStyles["standard-input"]}
             name="name"
             type="text"
             value={newUser.name}
@@ -76,7 +78,7 @@ export default function Register() {
           <label htmlFor="surname">Sobrenome</label>
           <br />
           <input
-            className="standard-input"
+            className={commonStyles["standard-input"]}
             name="surname"
             type="text"
             value={newUser.surname}
@@ -87,7 +89,7 @@ export default function Register() {
           <label htmlFor="dob">Data de nascimento</label>
           <br />
           <input
-            className="standard-input"
+            className={commonStyles["standard-input"]}
             name="dob"
             type="date"
             min="1950-01-01"
@@ -100,7 +102,7 @@ export default function Register() {
           <label htmlFor="password">Senha</label>
           <br />
           <input
-            className="standard-input"
+            className={commonStyles["standard-input"]}
             name="password"
             type="password"
             value={newUser.password}
@@ -111,7 +113,7 @@ export default function Register() {
           <label htmlFor="password">Confirmação da senha</label>
           <br />
           <input
-            className="standard-input"
+            className={commonStyles["standard-input"]}
             name="password"
             type="password"
             value={newUser.password}
@@ -119,13 +121,13 @@ export default function Register() {
           />
           <br />
           <br />
-          <button className="standard-button" type="submit">
+          <button className={commonStyles["standard-button"]} type="submit">
             Criar conta
           </button>
           <br />
-          <a href="/">
+          <Link to="/login">
             <small>Voltar</small>
-          </a>
+          </Link>
         </form>
       </div>
     </div>

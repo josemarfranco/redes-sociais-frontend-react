@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import commonStyles from "../features/common/Common.module.css";
+import loginStyles from "../features/login/Login.module.css";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -30,14 +32,14 @@ export default function Login() {
   };
 
   return (
-    <div className="standard-flex-container">
-      <div className="standard-left-panel" />
-      <div className="standard-right-panel">
-        <form className="standard-form fade-in" onSubmit={handleSubmit}>
+    <div className={loginStyles["container"]}>
+      <div className={loginStyles["left-panel"]} />
+      <div className={loginStyles["right-panel"]}>
+        <form className={loginStyles["form"]} onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
           <br />
           <input
-            className="standard-input"
+            className={commonStyles["standard-input"]}
             name="email"
             type="text"
             value={loginCredentials.email}
@@ -48,7 +50,7 @@ export default function Login() {
           <label htmlFor="password">Senha</label>
           <br />
           <input
-            className="standard-input"
+            className={commonStyles["standard-input"]}
             name="password"
             type="password"
             value={loginCredentials.password}
@@ -68,7 +70,7 @@ export default function Login() {
             <small>Esqueci minha senha</small>
           </a>
           <br />
-          <button className="standard-button" type="submit">
+          <button className={commonStyles["standard-button"]} type="submit">
             Login
           </button>
         </form>

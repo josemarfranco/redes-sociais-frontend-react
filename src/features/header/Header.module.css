@@ -3,7 +3,7 @@ header {
   display: flex;
   height: 50px;
   width: 100%;
-  background-color: #3C4B5A;
+  background-color: #3c4b5a;
   z-index: 1;
   filter: drop-shadow(5px 0px 5px rgba(0, 0, 0, 0.5));
 }
@@ -25,6 +25,7 @@ header {
   gap: 30px;
 }
 
-.header-right > a {
+.header-right > p {
   color: whitesmoke;
+  cursor: pointer;
 }
