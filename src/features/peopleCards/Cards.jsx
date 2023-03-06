@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
-import profileDefaultImage from "../../images/default.png";
+import cardsStyles from "./Cards.module.css";
+import profileDefaultImage from "../../media/default.png";
 
-export default function PeopleCards() {
+export default function Cards() {
   const [cards, setCards] = React.useState({
     data: [
       {
@@ -28,18 +29,18 @@ export default function PeopleCards() {
   }, []);
 
   const renderedCard = cards.data.map((card) => (
-    <div key={card._id} className="people-card">
-      <div className="people-card-id">
+    <div key={card._id} className={cardsStyles["people-card"]}>
+      <div className={cardsStyles["people-card-id"]}>
         <div>
           <img
-            className="people-card-picture"
+            className={cardsStyles["people-card-picture"]}
             width="50"
             height="50"
             src={card.profilePic}
             alt="nome"
           />
         </div>
-        <div className="people-card-name">
+        <div className={cardsStyles["people-card-name"]}>
           <p>
             <b>{card.name}</b>
           </p>
@@ -48,11 +49,11 @@ export default function PeopleCards() {
           </p>
         </div>
       </div>
-      <div className="people-card-bio">
+      <div className={cardsStyles["people-card-bio"]}>
         <p>{card.bio}</p>
       </div>
     </div>
   ));
 
-  return <>{renderedCard}</>;
+  return <div className={cardsStyles["cards"]}>{renderedCard}</div>;
 }

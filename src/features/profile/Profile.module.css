@@ -1,0 +1,12 @@
+.profile {
+  padding: 100px 20px;
+  width: 200px;
+}
+
+.profile-picture {
+  border-radius: 4px;
+}
+
+.profile-panel {
+  margin: 10px 0px 10px 0px;
+}

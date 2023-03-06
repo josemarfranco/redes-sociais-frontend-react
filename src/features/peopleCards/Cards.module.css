@@ -1,0 +1,26 @@
+.cards {
+  padding: 100px 20px;
+  width: 200px;
+}
+
+.people-card {
+  padding-bottom: 5px
+}
+
+.people-card-id {
+  display: flex;
+  align-items: center
+}
+
+.people-card-picture {
+  border-radius: 4px;
+}
+
+.people-card-name {
+  padding-left: 10px;
+}
+
+.people-card-bio, .people-card-bio > p {
+  padding-bottom: 5px;
+  font-size: 14px
+}

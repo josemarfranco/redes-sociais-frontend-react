@@ -1,0 +1,52 @@
+.post-input-box {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  padding: 20px;
+  border-bottom: solid whitesmoke 2px;
+}
+
+.post-input {
+  width: 95%;
+  height: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding: 10px;
+}
+
+.generalfeed {
+  padding: 100px 0px;
+  border-left: solid whitesmoke 2px;
+  border-right: solid whitesmoke 2px;
+}
+
+.post {
+  display: flex;
+  gap: 10px;
+  width: 500px;
+  min-height: 100px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom: solid whitesmoke 2px;
+}
+
+.post-profile-picture {
+  max-width: 100px;
+}
+
+.post-profile-picture > h2,
+.post-profile-picture > p {
+  font-size: 14px;
+}
+
+.post-profile-picture > img {
+  border-radius: 4px;
+}
+
+.post-profile {
+  color: lightgray;
+  line-height: 14px;
+}

@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
+import generalFeedStyles from "./GeneralFeed.module.css";
 import PostInputBox from "./PostInputBox";
-import profileDefaultImage from "../../images/default.png";
+import profileDefaultImage from "../../media/default.png";
 
 export default function GeneralFeed() {
   const [feed, setFeed] = React.useState({
@@ -55,19 +56,21 @@ export default function GeneralFeed() {
     }
   }
   const renderedPost = feed.data.map((post) => (
-    <div key={post._id} className="post fade-in">
-      <div className="post-profile-picture">
+    <div key={post._id} className={generalFeedStyles["post"]}>
+      <div className={generalFeedStyles["post-profile-picture"]}>
         <img width="100" height="100" src={post.profilePic} alt={post.name} />
-        <div className="post-profile">{formatDate(post.date)}</div>
+        <div className={generalFeedStyles["post-profile"]}>
+          {formatDate(post.date)}
+        </div>
       </div>
-      <div className="post-profile-content">
+      <div className={generalFeedStyles["post-profile-content"]}>
         <h3>{post.name}</h3>
         <p>{post.content}</p>
       </div>
     </div>
   ));
   return (
-    <div className="generalfeed">
+    <div className={generalFeedStyles["generalfeed"]}>
       <PostInputBox />
       {renderedPost}
     </div>

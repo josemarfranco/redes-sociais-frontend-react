@@ -1,5 +1,7 @@
 import axios from "axios";
 import React from "react";
+import commonStyles from "../../features/common/Common.module.css";
+import generalFeedStyles from "./GeneralFeed.module.css";
 
 export default function PostInputBox() {
   const [newPost, setNewPost] = React.useState({
@@ -37,16 +39,16 @@ export default function PostInputBox() {
       });
   };
   return (
-    <form className="post-input-box" onSubmit={handleSubmit}>
+    <form className={generalFeedStyles["post-input-box"]} onSubmit={handleSubmit}>
       <label htmlFor="content">Qual é a polêmica de hoje?</label>
       <input
-        className="post-input"
+        className={generalFeedStyles["post-input"]}
         name="content"
         type="text"
         value={newPost.inputPost}
         onChange={handleChange}
       />
-      <button className="standard-button" type="submit">
+      <button className={commonStyles["standard-button"]} type="submit">
         Postar
       </button>
     </form>

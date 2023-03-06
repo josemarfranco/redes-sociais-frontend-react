@@ -1,0 +1,30 @@
+header {
+  position: fixed;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  background-color: #3C4B5A;
+  z-index: 1;
+  filter: drop-shadow(5px 0px 5px rgba(0, 0, 0, 0.5));
+}
+
+.header-left {
+  padding-left: 30px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header-right {
+  padding-right: 30px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 30px;
+}
+
+.header-right > a {
+  color: whitesmoke;
+}

@@ -1,16 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/HomePage";
-import Login from "./pages/Login/LoginPage";
-import Register from "./pages/Register/RegisterPage";
-import checkAuth from "./pages/components/CheckAuth";
+import { ProtectedRoute, HandleLogout } from "./pages/components/CheckAuth";
+import "./features/common/Common.module.css";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={checkAuth() ? <Home /> : <Login />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={checkAuth() ? <Home /> : <Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<HandleLogout />} />
       </Routes>
     </Router>
   );
