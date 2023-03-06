@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ProtectedRoute, HandleLogout } from "./pages/components/CheckAuth";
+import { ProtectedRoute, HandleLogout } from "./features/components/CheckAuth";
 import "./features/common/Common.module.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
