@@ -1,12 +1,18 @@
-.profile {
+.container {
   padding: 100px 20px;
   width: 200px;
 }
 
-.profile-picture {
+.picture {
   border-radius: 4px;
 }
 
-.profile-panel {
+.panel {
   margin: 10px 0px 10px 0px;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    display: none;
+  }
 }

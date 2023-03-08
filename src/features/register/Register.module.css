@@ -4,7 +4,7 @@
 
 .left-panel {
   width: 50%;
-  background-color: #3C4B5A;
+  background-color: #3c4b5a;
 }
 
 .right-panel {
@@ -16,4 +16,25 @@
 
 .form {
   padding: 50px 40px;
+}
+
+@media only screen and (max-width: 600px) {
+  h2,
+  label,
+  a {
+    color: whitesmoke;
+  }
+
+  .left-panel {
+    display: none;
+  }
+
+  .right-panel {
+    width: 100vh;
+    height: 100vh;
+    background-color: #3c4b5a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }

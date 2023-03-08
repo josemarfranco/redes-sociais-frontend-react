@@ -1,26 +1,33 @@
-.cards {
+.container {
   padding: 100px 20px;
   width: 200px;
 }
 
-.people-card {
-  padding-bottom: 5px
+.card {
+  padding-bottom: 5px;
 }
 
-.people-card-id {
+.card-id {
   display: flex;
-  align-items: center
+  align-items: center;
 }
 
-.people-card-picture {
+.card-picture {
   border-radius: 4px;
 }
 
-.people-card-name {
+.card-name {
   padding-left: 10px;
 }
 
-.people-card-bio, .people-card-bio > p {
+.card-bio,
+.card-bio > p {
   padding-bottom: 5px;
-  font-size: 14px
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    display: none;
+  }
 }

@@ -29,18 +29,18 @@ export default function Cards() {
   }, []);
 
   const renderedCard = cards.data.map((card) => (
-    <div key={card._id} className={cardsStyles["people-card"]}>
-      <div className={cardsStyles["people-card-id"]}>
+    <div key={card._id} className={cardsStyles["card"]}>
+      <div className={cardsStyles["card-id"]}>
         <div>
           <img
-            className={cardsStyles["people-card-picture"]}
+            className={cardsStyles["card-picture"]}
             width="50"
             height="50"
             src={card.profilePic}
             alt="nome"
           />
         </div>
-        <div className={cardsStyles["people-card-name"]}>
+        <div className={cardsStyles["card-name"]}>
           <p>
             <b>{card.name}</b>
           </p>
@@ -49,11 +49,11 @@ export default function Cards() {
           </p>
         </div>
       </div>
-      <div className={cardsStyles["people-card-bio"]}>
+      <div className={cardsStyles["card-bio"]}>
         <p>{card.bio}</p>
       </div>
     </div>
   ));
 
-  return <div className={cardsStyles["cards"]}>{renderedCard}</div>;
+  return <div className={cardsStyles["container"]}>{renderedCard}</div>;
 }

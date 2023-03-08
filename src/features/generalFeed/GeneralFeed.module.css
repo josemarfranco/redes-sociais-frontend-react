@@ -1,3 +1,9 @@
+.container {
+  padding: 100px 0px;
+  border-left: solid whitesmoke 2px;
+  border-right: solid whitesmoke 2px;
+}
+
 .post-input-box {
   display: flex;
   gap: 10px;
@@ -15,12 +21,6 @@
   border-radius: 5px;
   background-color: whitesmoke;
   padding: 10px;
-}
-
-.generalfeed {
-  padding: 100px 0px;
-  border-left: solid whitesmoke 2px;
-  border-right: solid whitesmoke 2px;
 }
 
 .post {
@@ -49,4 +49,27 @@
 .post-profile {
   color: lightgray;
   line-height: 14px;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+    border: none;
+  }
+
+  .post-input-box {
+    width: auto;
+  }
+
+  .post-input-box > label {
+    color: black;
+  }
+
+  .post-input {
+    width: 85vw;
+  }
+
+  .post {
+    width: auto;
+  }
 }

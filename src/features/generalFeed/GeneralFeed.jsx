@@ -70,7 +70,7 @@ export default function GeneralFeed() {
     </div>
   ));
   return (
-    <div className={generalFeedStyles["generalfeed"]}>
+    <div className={generalFeedStyles["container"]}>
       <PostInputBox />
       {renderedPost}
     </div>
