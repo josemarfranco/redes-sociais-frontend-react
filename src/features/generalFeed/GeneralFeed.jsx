@@ -18,7 +18,7 @@ export default function GeneralFeed() {
   });
 
   React.useEffect(() => {
-    const authHeader = `Bearer ${localStorage.getItem("OI TERINHA!")}`;
+    const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
     axios
       .get("/queries/generalfeed", { headers: { Authorization: authHeader } })
       .then((res) => {

@@ -13,7 +13,7 @@ export default function PostInputBox() {
   };
 
   const handleSubmit = (event) => {
-    const authHeader = `Bearer ${localStorage.getItem("OI TERINHA!")}`;
+    const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
     event.preventDefault();
     axios
       .post(

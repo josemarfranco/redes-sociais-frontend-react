@@ -16,7 +16,7 @@ export default function Home() {
   });
 
   React.useEffect(() => {
-    const authHeader = `Bearer ${localStorage.getItem("OI TERINHA!")}`;
+    const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
     axios
       .get("/users/me", { headers: { Authorization: authHeader } })
       .then((res) => {

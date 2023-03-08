@@ -6,17 +6,23 @@ export default function Header(props) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("OI TERINHA!");
+    localStorage.removeItem("pixit");
     navigate("/login");
   };
-
-  console.log(props)
 
   return (
     <header>
       <div className={headerStyles["left-panel"]}>
-        <img width="100" height="100" src={props.card.profilePic} alt={props.card.name} />
-        <p>{props.card.name}</p>
+        <img
+          width="100"
+          height="100"
+          src={props.card.profilePic}
+          alt={props.card.name}
+        />
+        <div className={headerStyles["credentials"]}>
+          <p>{props.card.name}</p>
+          <p className={headerStyles["surname"]}>{props.card.surname}</p>
+        </div>
       </div>
       <div className={headerStyles["right-panel"]}>
         <p onClick={handleLogout}>Sair</p>

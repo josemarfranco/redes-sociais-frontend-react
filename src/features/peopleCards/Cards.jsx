@@ -17,7 +17,7 @@ export default function Cards() {
   });
 
   React.useEffect(() => {
-    const authHeader = `Bearer ${localStorage.getItem("OI TERINHA!")}`;
+    const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
     axios
       .get("/queries/peoplecards", { headers: { Authorization: authHeader } })
       .then((res) => {

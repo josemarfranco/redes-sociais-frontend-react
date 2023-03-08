@@ -12,8 +12,6 @@ export default function Profile(props) {
         src={props.card.profilePic}
         alt={props.card.name}
       />
-      <h2>{props.card.name}</h2>
-      <h2>{props.card.surname}</h2>
       <div className={profileStyles["panel"]}></div>
     </div>
   );

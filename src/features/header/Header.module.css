@@ -25,8 +25,7 @@ header {
   gap: 30px;
 }
 
-.right-panel > p,
-.left-panel > p {
+.right-panel > p {
   color: whitesmoke;
   cursor: pointer;
 }
@@ -35,13 +34,18 @@ header {
   display: none;
 }
 
+.credentials {
+  display: flex;
+  gap: 5px;
+  color: whitesmoke;
+}
+
 @media only screen and (max-width: 600px) {
   header {
     height: 10%;
   }
 
-  .right-panel > p,
-  .left-panel > p {
+  .right-panel > p {
     font-size: 120%;
   }
 
@@ -50,5 +54,13 @@ header {
     width: 40px;
     height: 40px;
     border-radius: 3px;
+  }
+
+  .credentials {
+    font-size: 120%;
+  }
+
+  .surname {
+    display: none;
   }
 }

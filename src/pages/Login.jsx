@@ -23,7 +23,7 @@ export default function Login() {
     axios
       .post("/login", loginCredentials)
       .then((res) => {
-        localStorage.setItem("OI TERINHA!", res.data.jwt);
+        localStorage.setItem("pixit", res.data.jwt);
         navigate("/");
       })
       .catch((error) => {

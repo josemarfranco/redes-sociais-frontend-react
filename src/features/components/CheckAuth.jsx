@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 export const HandleLogout = () => {
-  localStorage.removeItem("jwt");
+  localStorage.removeItem("pixit");
   return <Navigate to="/login" />;
 };
 
@@ -12,7 +12,7 @@ export const ProtectedRoute = ({ children }) => {
   fetch("/auth", {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      Authorization: `Bearer ${localStorage.getItem("pixit")}`,
       "content-type": "application/json; charset=UTF-8",
     },
   })
