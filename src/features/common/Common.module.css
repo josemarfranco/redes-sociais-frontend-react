@@ -24,6 +24,9 @@ small {
   font-weight: bold;
 }
 
+img {
+  object-fit: cover;
+}
 .standard-input {
   width: 200px;
   height: 20px;

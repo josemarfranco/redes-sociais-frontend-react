@@ -12,6 +12,7 @@ export default function Register() {
     surname: "",
     dob: "",
     password: "",
+    passwordConf: "",
   });
   const navigate = useNavigate();
 
@@ -114,9 +115,9 @@ export default function Register() {
           <br />
           <input
             className={commonStyles["standard-input"]}
-            name="password"
+            name="passwordConf"
             type="password"
-            value={newUser.password}
+            value={newUser.passwordConf}
             onChange={handleChange}
           />
           <br />
