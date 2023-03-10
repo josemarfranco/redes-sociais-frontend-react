@@ -6,6 +6,7 @@ import generalFeedStyles from "./GeneralFeed.module.css";
 export default function PostInputBox() {
   const [newPost, setNewPost] = React.useState({
     image: "",
+    fileName: "",
     content: "",
   });
   const [picturePreview, setPicturePreview] = React.useState(null);
@@ -23,8 +24,12 @@ export default function PostInputBox() {
         { headers: { "content-type": "multipart/form-data" } }
       )
       .then((res) => {
-        setNewPost({ ...newPost, image: res.data.filePath });
-        setPicturePreview(res.data.filePath);
+        setNewPost({
+          ...newPost,
+          image: res.data.filePath,
+          fileName: res.data.fileName,
+        });
+        setPicturePreview(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -50,11 +55,10 @@ export default function PostInputBox() {
   };
 
   const cancelImagePost = () => {
-    setNewPost({ ...newPost, image: "" });
+    setNewPost({ ...newPost, image: "", fileName: "" });
     setPicturePreview(null);
+    axios.delete(`/media/remove/${picturePreview.fileName}`);
   };
-
-  console.log(newPost);
 
   const showSubmitControls = () => {
     return (
@@ -93,7 +97,7 @@ export default function PostInputBox() {
         <div className={generalFeedStyles["post-input-picturePreview-area"]}>
           <img
             className={generalFeedStyles["post-input-picturePreview"]}
-            src={picturePreview}
+            src={picturePreview.filePath}
             alt="Preview"
           />
         </div>

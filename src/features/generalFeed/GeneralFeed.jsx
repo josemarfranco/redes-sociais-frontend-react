@@ -55,6 +55,7 @@ export default function GeneralFeed() {
       );
     }
   }
+
   const renderedPost = feed.data.map((post) => (
     <div key={post._id} className={generalFeedStyles["post"]}>
       <div className={generalFeedStyles["post-profile-picture"]}>
