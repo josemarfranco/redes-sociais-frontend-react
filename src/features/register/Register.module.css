@@ -12,10 +12,36 @@
   display: flex;
   align-items: center;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .form {
   padding: 50px 40px;
+}
+
+.form-profilepic-area {
+  display: flex;
+  gap: 10px;
+}
+
+.form-profilepic {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 10px;
+}
+
+.form-button-area {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 @media only screen and (max-width: 600px) {

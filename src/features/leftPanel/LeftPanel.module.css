@@ -16,9 +16,10 @@
 
 .logo {
   position: absolute;
-  top: 44%;
-  right: 52%;
-  width: 150px;
+  bottom: 0%;
+  right: 50%;
+  padding: 20px;
+  width: 80px;
 }
 
 @media only screen and (max-width: 600px) {

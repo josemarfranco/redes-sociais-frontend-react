@@ -66,17 +66,14 @@ export default function PostInputBox(props) {
       <div className={generalFeedStyles["post-input-button-area"]}>
         {picturePreview ? (
           <button
-            className={generalFeedStyles["pixit-button"]}
+            className={commonStyles["deny-button"]}
             type="submit"
             onClick={cancelImagePost}
           >
             Remover Foto
           </button>
         ) : (
-          <label
-            type="button"
-            className={generalFeedStyles["pixit-label-button"]}
-          >
+          <label type="button" className={commonStyles["pixit-label-button"]}>
             <input type="file" name="image" onChange={handleFileChange} />
             {picturePreview ? "Remover Foto" : "Escolher Foto"}
           </label>

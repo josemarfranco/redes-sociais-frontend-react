@@ -39,28 +39,34 @@ export default function Login() {
       <div className={loginStyles["right-panel"]}>
         <img className={loginStyles["logo"]} src={logo} alt={logo} />
         <form className={loginStyles["form"]} onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <input
-            className={commonStyles["standard-input"]}
-            name="email"
-            type="text"
-            value={loginCredentials.email}
-            onChange={handleChange}
-          />
-          <label htmlFor="password">Senha</label>
-          <input
-            className={commonStyles["standard-input"]}
-            name="password"
-            type="password"
-            value={loginCredentials.password}
-            onChange={handleChange}
-          />
-          <Link to="/register">
-            <small>Criar conta</small>
-          </Link>
-          <button className={commonStyles["standard-button"]} type="submit">
-            Login
-          </button>
+          <div className={loginStyles["form-field"]}>
+            <label htmlFor="email">Email</label>
+            <input
+              className={commonStyles["standard-input"]}
+              name="email"
+              type="text"
+              value={loginCredentials.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={loginStyles["form-field"]}>
+            <label htmlFor="password">Senha</label>
+            <input
+              className={commonStyles["standard-input"]}
+              name="password"
+              type="password"
+              value={loginCredentials.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={loginStyles["form-button-area"]}>
+            <Link to="/register">
+              <small>Criar conta</small>
+            </Link>
+            <button className={commonStyles["standard-button"]} type="submit">
+              Login
+            </button>
+          </div>
         </form>
       </div>
     </div>

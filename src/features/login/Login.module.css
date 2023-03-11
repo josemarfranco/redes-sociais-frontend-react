@@ -17,6 +17,19 @@
   padding: 50px 40px;
 }
 
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 10px;
+}
+
+.form-button-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 @media only screen and (max-width: 600px) {
   h2,
   label,
