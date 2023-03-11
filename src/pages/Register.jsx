@@ -70,8 +70,6 @@ export default function Register() {
     axios.delete(`/media/remove/${picturePreview.fileName}`);
   };
 
-  console.log(picturePreview);
-
   return (
     <div className={registerStyles["container"]}>
       <LeftPanel />

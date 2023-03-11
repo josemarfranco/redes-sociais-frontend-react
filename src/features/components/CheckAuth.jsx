@@ -7,21 +7,7 @@ export const HandleLogout = () => {
 };
 
 export const ProtectedRoute = ({ children }) => {
-  const [logged, setLogged] = React.useState("");
-
-  fetch("/auth", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("pixit")}`,
-      "content-type": "application/json; charset=UTF-8",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      setLogged(data.status);
-    });
-
-  if (logged === "ERR") {
+  if (!localStorage.getItem("pixit")) {
     return <Navigate to="/login" />;
   } else {
     return children;
