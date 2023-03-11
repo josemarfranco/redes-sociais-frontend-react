@@ -3,7 +3,7 @@ import React from "react";
 import commonStyles from "../../features/common/Common.module.css";
 import generalFeedStyles from "./GeneralFeed.module.css";
 
-export default function PostInputBox() {
+export default function PostInputBox(props) {
   const [newPost, setNewPost] = React.useState({
     image: "",
     fileName: "",
@@ -48,6 +48,7 @@ export default function PostInputBox() {
           image: "",
         });
         setPicturePreview("");
+        props.setReload(true);
       })
       .catch((err) => {
         console.error(err);

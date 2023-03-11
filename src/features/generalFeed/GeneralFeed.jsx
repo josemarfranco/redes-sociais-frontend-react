@@ -16,6 +16,7 @@ export default function GeneralFeed() {
       },
     ],
   });
+  const [reload, setReload] = React.useState(false);
 
   React.useEffect(() => {
     const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
@@ -23,56 +24,78 @@ export default function GeneralFeed() {
       .get("/queries/generalfeed", { headers: { Authorization: authHeader } })
       .then((res) => {
         setFeed(res);
+        setReload(false);
       })
       .catch((error) => error.message);
-  }, []);
+  }, [reload]);
 
   function formatDate(date) {
     const formattedDate = new Date(date);
-    const [day, month, hours, minutes] = [
+    const [day, month, year, hours, minutes] = [
       formattedDate.getDate(),
       formattedDate.getMonth(),
+      formattedDate.getFullYear(),
       formattedDate.getHours(),
       formattedDate.getMinutes(),
     ];
-    if (new Date()) {
-      return (
+    return (
+      <div className={generalFeedStyles["post-date"]}>
         <small>
-          {hours}:{minutes}
+          {day}/{month}/{year}
         </small>
-      );
-    } else if (new Date() - 1) {
-      return (
         <small>
-          {hours}:{minutes} (Ontem)
+          ({hours}:{minutes})
         </small>
-      );
-    } else {
-      return (
-        <small>
-          {hours}:{minutes} ({day}/{month})
-        </small>
-      );
-    }
+      </div>
+    );
   }
 
   const renderedPost = feed.data.map((post) => (
-    <div key={post._id} className={generalFeedStyles["post"]}>
-      <div className={generalFeedStyles["post-profile-picture"]}>
-        <img width="100" height="100" src={post.profilePic} alt={post.name} />
-        <div className={generalFeedStyles["post-profile"]}>
-          {formatDate(post.date)}
+    <div key={post._id}>
+      {post.image ? (
+        <div className={generalFeedStyles["pixit-post"]}>
+          <div className={generalFeedStyles["pixit-post-profile"]}>
+            <img width="30" height="30" src={post.profilePic} alt={post.name} />
+            <h3>{post.name}</h3>
+          </div>
+          <div className={generalFeedStyles["pixit-post-content"]}>
+            <div className={generalFeedStyles["pixit-post-image-div"]}>
+              <img
+                className={generalFeedStyles["pixit-post-image"]}
+                src={post.image}
+                alt={post.image}
+              />
+            </div>
+            <div className={generalFeedStyles["pixit-post-text-content"]}>
+              <p>{post.content}</p>
+              {formatDate(post.date)}
+            </div>
+          </div>
         </div>
-      </div>
-      <div className={generalFeedStyles["post-profile-content"]}>
-        <h3>{post.name}</h3>
-        <p>{post.content}</p>
-      </div>
+      ) : (
+        <div key={post._id} className={generalFeedStyles["post"]}>
+          <div className={generalFeedStyles["post-profile-picture"]}>
+            <img
+              width="100"
+              height="100"
+              src={post.profilePic}
+              alt={post.name}
+            />
+            <div className={generalFeedStyles["post-profile"]}>
+              {formatDate(post.date)}
+            </div>
+          </div>
+          <div className={generalFeedStyles["post-profile-content"]}>
+            <h3>{post.name}</h3>
+            <p>{post.content}</p>
+          </div>
+        </div>
+      )}
     </div>
   ));
   return (
     <div className={generalFeedStyles["container"]}>
-      <PostInputBox />
+      <PostInputBox setReload={setReload} />
       {renderedPost}
     </div>
   );
