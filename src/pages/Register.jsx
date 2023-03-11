@@ -3,6 +3,7 @@ import axios from "axios";
 import registerStyles from "../features/register/Register.module.css";
 import commonStyles from "../features/common/Common.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import LeftPanel from "../features/leftPanel/LeftPanel";
 
 export default function Register() {
   const [newUser, setNewUser] = React.useState({
@@ -44,18 +45,12 @@ export default function Register() {
 
   return (
     <div className={registerStyles["container"]}>
-      <div className={registerStyles["left-panel"]} />
+      <LeftPanel />
       <div className={registerStyles["right-panel"]}>
         <form className={registerStyles["form"]} onSubmit={handleSubmit}>
-          <h2>Cadastro</h2>
-          <br />
           <label htmlFor="profilePic">Foto</label>
-          <br />
           <input name="profilePic" type="file" onChange={handleFileChange} />
-          <br />
-          <br />
           <label htmlFor="email">Email</label>
-          <br />
           <input
             className={commonStyles["standard-input"]}
             name="email"
@@ -63,10 +58,7 @@ export default function Register() {
             value={newUser.email}
             onChange={handleChange}
           />
-          <br />
-          <br />
           <label htmlFor="name">Nome</label>
-          <br />
           <input
             className={commonStyles["standard-input"]}
             name="name"
@@ -74,10 +66,7 @@ export default function Register() {
             value={newUser.name}
             onChange={handleChange}
           />
-          <br />
-          <br />
           <label htmlFor="surname">Sobrenome</label>
-          <br />
           <input
             className={commonStyles["standard-input"]}
             name="surname"
@@ -85,10 +74,7 @@ export default function Register() {
             value={newUser.surname}
             onChange={handleChange}
           />
-          <br />
-          <br />
           <label htmlFor="dob">Data de nascimento</label>
-          <br />
           <input
             className={commonStyles["standard-input"]}
             name="dob"
@@ -98,10 +84,7 @@ export default function Register() {
             value={newUser.dob}
             onChange={handleChange}
           />
-          <br />
-          <br />
           <label htmlFor="password">Senha</label>
-          <br />
           <input
             className={commonStyles["standard-input"]}
             name="password"
@@ -109,10 +92,7 @@ export default function Register() {
             value={newUser.password}
             onChange={handleChange}
           />
-          <br />
-          <br />
           <label htmlFor="password">Confirmação da senha</label>
-          <br />
           <input
             className={commonStyles["standard-input"]}
             name="passwordConf"
@@ -120,12 +100,9 @@ export default function Register() {
             value={newUser.passwordConf}
             onChange={handleChange}
           />
-          <br />
-          <br />
           <button className={commonStyles["standard-button"]} type="submit">
             Criar conta
           </button>
-          <br />
           <Link to="/login">
             <small>Voltar</small>
           </Link>

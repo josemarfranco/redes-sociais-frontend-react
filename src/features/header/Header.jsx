@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import headerStyles from "./Header.module.css";
+import logo from "../../media/logo.jpg";
 
 export default function Header(props) {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export default function Header(props) {
           <p className={headerStyles["surname"]}>{props.card.surname}</p>
         </div>
       </div>
+      <img src={logo} alt={logo} />
       <div className={headerStyles["right-panel"]}>
         <p onClick={handleLogout}>Sair</p>
       </div>

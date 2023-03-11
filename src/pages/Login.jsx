@@ -2,7 +2,9 @@ import React from "react";
 import axios from "axios";
 import commonStyles from "../features/common/Common.module.css";
 import loginStyles from "../features/login/Login.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import LeftPanel from "../features/leftPanel/LeftPanel";
+import logo from "../media/alphalogo.png";
 
 export default function Login() {
   const [loginCredentials, setLoginCredentials] = React.useState({
@@ -33,11 +35,11 @@ export default function Login() {
 
   return (
     <div className={loginStyles["container"]}>
-      <div className={loginStyles["left-panel"]} />
+      <LeftPanel />
       <div className={loginStyles["right-panel"]}>
+        <img className={loginStyles["logo"]} src={logo} alt={logo} />
         <form className={loginStyles["form"]} onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
-          <br />
           <input
             className={commonStyles["standard-input"]}
             name="email"
@@ -45,10 +47,7 @@ export default function Login() {
             value={loginCredentials.email}
             onChange={handleChange}
           />
-          <br />
-          <br />
           <label htmlFor="password">Senha</label>
-          <br />
           <input
             className={commonStyles["standard-input"]}
             name="password"
@@ -56,20 +55,9 @@ export default function Login() {
             value={loginCredentials.password}
             onChange={handleChange}
           />
-          <br />
-          <br />
-          <a href="/register">
+          <Link to="/register">
             <small>Criar conta</small>
-          </a>
-          <br />
-          <a
-            href="https://giphy.com/gifs/se-fudeu-fodeu-Y4c8GgvNh7BiBbv8fp"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <small>Esqueci minha senha</small>
-          </a>
-          <br />
+          </Link>
           <button className={commonStyles["standard-button"]} type="submit">
             Login
           </button>
