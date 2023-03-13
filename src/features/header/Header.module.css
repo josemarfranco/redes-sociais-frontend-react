@@ -40,13 +40,11 @@ header {
   color: whitesmoke;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
   header {
+    min-height: 50px;
     height: 10%;
-  }
-
-  header > img {
-    display: none;
+    max-height: 70px;
   }
 
   .right-panel > p {
@@ -65,6 +63,12 @@ header {
   }
 
   .surname {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  header > img {
     display: none;
   }
 }
