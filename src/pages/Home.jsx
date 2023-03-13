@@ -20,7 +20,14 @@ export default function Home() {
     axios
       .get("/users/me", { headers: { Authorization: authHeader } })
       .then((res) => {
-        setCard(res.data);
+        setCard({
+          id: res.data._id,
+          name: res.data.name,
+          surname: res.data.surname,
+          profilePic: res.data.profilePic
+            ? res.data.profilePic
+            : profileDefaultImage,
+        });
       })
       .catch((error) => {
         alert(error.message);

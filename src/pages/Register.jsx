@@ -8,7 +8,7 @@ import defaultImage from "../media/default.png";
 
 export default function Register() {
   const [newUser, setNewUser] = React.useState({
-    profilePic: defaultImage,
+    profilePic: "",
     fileName: "",
     email: "",
     name: "",
@@ -39,7 +39,7 @@ export default function Register() {
       .then((res) => {
         setNewUser({
           ...newUser,
-          profilePic: res.data.filePath,
+          profilePic: res.data.filePath ? res.data.filePath : "",
           fileName: res.data.fileName,
         });
         setPicturePreview(res.data);
@@ -56,7 +56,6 @@ export default function Register() {
         headers: { "content-type": "multipart/form-data" },
       })
       .then((res) => {
-        alert(res.data.message);
         navigate("/login");
       })
       .catch((error) => {
@@ -65,7 +64,7 @@ export default function Register() {
   };
 
   const cancelImagePost = () => {
-    setNewUser({ ...newUser, profilePic: defaultImage, fileName: "" });
+    setNewUser({ ...newUser, fileName: "" });
     setPicturePreview({ filePath: defaultImage });
     axios.delete(`/media/remove/${picturePreview.fileName}`);
   };
