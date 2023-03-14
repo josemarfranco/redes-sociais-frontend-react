@@ -36,7 +36,7 @@ export default function Cards() {
             className={cardsStyles["card-picture"]}
             width="50"
             height="50"
-            src={card.profilePic}
+            src={card.profilePic ? card.profilePic : profileDefaultImage}
             alt="nome"
           />
         </div>

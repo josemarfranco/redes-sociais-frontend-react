@@ -8,6 +8,8 @@
   margin: 0;
   padding: 0;
   font-family: "OpenSans-Light", sans-serif;
+  word-break: break-word;
+
 }
 
 body {
@@ -30,6 +32,7 @@ small {
 
 img {
   object-fit: cover;
+  display: block;
 }
 
 input[type="date"] {

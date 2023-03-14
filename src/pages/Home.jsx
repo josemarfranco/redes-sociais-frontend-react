@@ -9,7 +9,7 @@ import profileDefaultImage from "../media/default.png";
 
 export default function Home() {
   const [card, setCard] = React.useState({
-    id: "",
+    _id: "",
     name: "",
     surname: "",
     profilePic: profileDefaultImage,
@@ -21,7 +21,7 @@ export default function Home() {
       .get("/users/me", { headers: { Authorization: authHeader } })
       .then((res) => {
         setCard({
-          id: res.data._id,
+          _id: res.data.id,
           name: res.data.name,
           surname: res.data.surname,
           profilePic: res.data.profilePic
@@ -38,7 +38,7 @@ export default function Home() {
     <div className={homeStyles["container"]}>
       <Header card={card} />
       <Profile card={card} />
-      <GeneralFeed />
+      <GeneralFeed card={card} />
       <PeopleCards />
     </div>
   );

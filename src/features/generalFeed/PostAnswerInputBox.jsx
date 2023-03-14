@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import commonStyles from "../common/Common.module.css";
 import generalFeedStyles from "./GeneralFeed.module.css";
+import profileDefaultImage from "../../media/default.png";
 
 export default function PostAnswerInputBox(props) {
   const [newAnswer, setNewAnswer] = React.useState({
@@ -10,7 +11,12 @@ export default function PostAnswerInputBox(props) {
   const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
 
   const handleChange = (event) => {
-    setNewAnswer({ ...newAnswer, content: event.target.value });
+    setNewAnswer({
+      ...newAnswer,
+      content: event.target.value,
+      profilePic: props.card.profilePic ? props.card.profilePic : "",
+      name: props.card.name,
+    });
   };
 
   const handleSubmit = (event) => {
@@ -29,6 +35,7 @@ export default function PostAnswerInputBox(props) {
         console.error(err);
       });
   };
+
   return (
     <>
       {props.post.image ? (
@@ -43,7 +50,11 @@ export default function PostAnswerInputBox(props) {
           >
             <img
               className={generalFeedStyles["pixit-post-anwser-area-picture"]}
-              src={props.post.profilePic}
+              src={
+                props.card.profilePic
+                  ? props.card.profilePic
+                  : profileDefaultImage
+              }
               alt={props.post.name}
             />
             <input
@@ -66,7 +77,11 @@ export default function PostAnswerInputBox(props) {
           <div className={generalFeedStyles["post-answer-picture-input-area"]}>
             <img
               className={generalFeedStyles["post-anwser-area-picture"]}
-              src={props.post.profilePic}
+              src={
+                props.card.profilePic
+                  ? props.card.profilePic
+                  : profileDefaultImage
+              }
               alt={props.post.name}
             />
             <input
