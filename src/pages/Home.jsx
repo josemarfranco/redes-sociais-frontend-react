@@ -17,6 +17,7 @@ export default function Home() {
     profilePic: profileDefaultImage,
     friends: [],
   });
+  const [reloadUser, setReloadUser] = React.useState(false);
   const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
 
   React.useEffect(() => {
@@ -34,14 +35,15 @@ export default function Home() {
           friendsLen: res.data.friendsLen,
           postsLen: res.data.postsLen,
         });
+        setReloadUser(false);
       })
       .catch((error) => {
         alert(error.message);
       });
-  }, [authHeader]);
+  }, [reloadUser, authHeader]);
 
   return (
-    <UserContext.Provider value={{ currentUser }}>
+    <UserContext.Provider value={{ currentUser, setReloadUser }}>
       <div className={homeStyles["container"]}>
         <Header />
         <Profile />

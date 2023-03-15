@@ -53,8 +53,6 @@ export default function AnyUserFeed() {
       .catch((error) => error.message);
   }, [authHeader, idRouterParam]);
 
-  console.log(reload);
-
   const renderedPost = feed.data.map((post) => (
     <div key={post._id}>
       {post.image ? (
@@ -143,17 +141,17 @@ export default function AnyUserFeed() {
     <div className={GeneralFeedStyles["container"]}>
       <div className={AnyUserFeedStyles["profile-area"]}>
         <div className={AnyUserFeedStyles["profile"]}>
-          <img src={anyUser.profilePic} alt={anyUser.profilePic} />
+          <img
+            src={anyUser.profilePic ? anyUser.profilePic : profileDefaultImage}
+            alt={anyUser.profilePic}
+          />
           <div className={AnyUserFeedStyles["credentials"]}>
             <h2>{anyUser.name}</h2>
             <h2>{anyUser.surname}</h2>
           </div>
         </div>
         <div className={AnyUserFeedStyles["button-area"]}>
-          <FollowButton
-            anyUser={idRouterParam}
-            setReload={setReload}
-          />
+          <FollowButton anyUser={idRouterParam} setReload={setReload} />
         </div>
       </div>
       {renderedPost}

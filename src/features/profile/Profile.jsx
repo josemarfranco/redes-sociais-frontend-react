@@ -9,6 +9,9 @@ export default function Profile() {
   return (
     <div className={profileStyles["container"]}>
       <div className={profileStyles["panel"]}>
+      <div className={profileStyles["panel-item"]}>
+        <h4>{currentUser.name} no PixIt</h4>
+      </div>
         <div className={profileStyles["panel-item"]}>
           <p>Seguindo</p>
           <p>{currentUser.friendsLen}</p>
@@ -19,6 +22,9 @@ export default function Profile() {
         </div>
       </div>
       <div className={profileStyles["links"]}>
+        <h4>
+          Links
+        </h4>
         <p>
           <Link to={`/users/${currentUser._id}`}>Ver meu Perfil</Link>
         </p>

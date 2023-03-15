@@ -4,9 +4,8 @@ import { UserContext } from "../../pages/Home";
 import commonStyles from "../common/Common.module.css";
 
 export default function FollowButton(props) {
-  const { currentUser } = React.useContext(UserContext);
+  const { currentUser, setReloadUser } = React.useContext(UserContext);
   const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
-  const [button, setButton] = React.useState();
 
   const addFollower = () => {
     axios
@@ -19,6 +18,7 @@ export default function FollowButton(props) {
       )
       .then(() => {
         props.setReload(true);
+        setReloadUser(true);
       })
       .catch((err) => {
         console.error(err);
@@ -36,6 +36,7 @@ export default function FollowButton(props) {
       )
       .then(() => {
         props.setReload(true);
+        setReloadUser(true);
       })
       .catch((err) => {
         console.error(err);
@@ -48,7 +49,7 @@ export default function FollowButton(props) {
         className={commonStyles["standard-deny-button"]}
         onClick={removeFollower}
       >
-        Deixar de seguir{props.reload}
+        Deixar de seguir
       </button>
     );
   } else if (props.anyUser.friends?.includes(currentUser._id)) {
