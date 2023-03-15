@@ -1,9 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../pages/Home";
+import { useNavigate, Link } from "react-router-dom";
 import headerStyles from "./Header.module.css";
 import logo from "../../media/logo.jpg";
 
-export default function Header(props) {
+export default function Header() {
+  const { currentUser } = React.useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -14,15 +16,16 @@ export default function Header(props) {
   return (
     <header>
       <div className={headerStyles["left-panel"]}>
-        <img
-          width="100"
-          height="100"
-          src={props.card.profilePic}
-          alt={props.card.name}
-        />
+        <Link to="/">
+          <img src={currentUser.profilePic} alt={currentUser.name} />
+        </Link>
         <div className={headerStyles["credentials"]}>
-          <p>{props.card.name}</p>
-          <p className={headerStyles["surname"]}>{props.card.surname}</p>
+          <Link to="/">
+            <p>{currentUser.name}</p>
+          </Link>
+          <Link to="/">
+            <p className={headerStyles["surname"]}>{currentUser.surname}</p>
+          </Link>
         </div>
       </div>
       <img src={logo} alt={logo} />

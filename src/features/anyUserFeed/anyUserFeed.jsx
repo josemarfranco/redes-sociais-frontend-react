@@ -1,9 +1,13 @@
 import React from "react";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import anyUserFeedStyles from "./anyUserFeed.module.css";
+import anyUserFeedStyles from "../generalFeed/GeneralFeed.module.css";
+import PostAnswerInputBox from "../generalFeed/PostAnswerInputBox";
+import formatDate from "../components/formatDate";
 import profileDefaultImage from "../../media/default.png";
 
 export default function AnyUserFeed() {
+  const idRouterParam = useParams();
   const [feed, setFeed] = React.useState({
     data: [
       {
@@ -15,47 +19,35 @@ export default function AnyUserFeed() {
       },
     ],
   });
+  const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
   const [reload, setReload] = React.useState(false);
 
   React.useEffect(() => {
-    const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
     axios
-      .get("/queries/generalfeed", { headers: { Authorization: authHeader } })
+      .get("/queries/anyuserfeed/" + idRouterParam.userId, {
+        headers: { Authorization: authHeader },
+      })
       .then((res) => {
         setFeed(res);
         setReload(false);
       })
       .catch((error) => error.message);
-  }, [reload]);
-
-  function formatDate(date) {
-    const formattedDate = new Date(date);
-    const [day, month, year, hours, minutes] = [
-      formattedDate.getDate(),
-      formattedDate.getMonth(),
-      formattedDate.getFullYear(),
-      formattedDate.getHours(),
-      formattedDate.getMinutes(),
-    ];
-    return (
-      <div className={anyUserFeedStyles["post-date"]}>
-        <small>
-          {day}/{month}/{year}
-        </small>
-        <small>
-          ({hours}:{minutes})
-        </small>
-      </div>
-    );
-  }
+  }, [reload, authHeader, idRouterParam]);
 
   const renderedPost = feed.data.map((post) => (
     <div key={post._id}>
       {post.image ? (
         <div className={anyUserFeedStyles["pixit-post"]}>
           <div className={anyUserFeedStyles["pixit-post-profile"]}>
-            <img width="30" height="30" src={post.profilePic} alt={post.name} />
-            <h3>{post.name}</h3>
+            <Link to={`/${post.parentId}`}>
+              <img
+                src={post.profilePic ? post.profilePic : profileDefaultImage}
+                alt={post.name}
+              />
+            </Link>
+            <Link to={`/${post.parentId}`}>
+              <h3>{post.name}</h3>
+            </Link>
           </div>
           <div className={anyUserFeedStyles["pixit-post-content"]}>
             <div className={anyUserFeedStyles["pixit-post-image-div"]}>
@@ -67,27 +59,82 @@ export default function AnyUserFeed() {
             </div>
             <div className={anyUserFeedStyles["pixit-post-text-content"]}>
               <p>{post.content}</p>
-              {formatDate(post.date)}
+              <div className={anyUserFeedStyles["post-date"]}>
+                {formatDate(post.date)}
+              </div>
             </div>
           </div>
+          <PostAnswerInputBox post={post} setReload={setReload} />
+          {post.answerPosts?.map((answerPost) => (
+            <div
+              key={answerPost._id}
+              className={anyUserFeedStyles["pixit-post-answer-area"]}
+            >
+              <div className={anyUserFeedStyles["pixit-post-answer"]}>
+                <Link to={`/${answerPost.ownerId}`}>
+                  <img
+                    className={
+                      anyUserFeedStyles["pixit-post-anwser-area-picture"]
+                    }
+                    src={
+                      answerPost.profilePic
+                        ? answerPost.profilePic
+                        : profileDefaultImage
+                    }
+                    alt={answerPost.name}
+                  />
+                </Link>
+                <p>{answerPost.content}</p>
+              </div>
+            </div>
+          ))}
+          <div className={anyUserFeedStyles["pixit-post-anwser-area-gambs"]} />
         </div>
       ) : (
         <div key={post._id} className={anyUserFeedStyles["post"]}>
-          <div className={anyUserFeedStyles["post-profile-picture"]}>
-            <img
-              width="100"
-              height="100"
-              src={post.profilePic}
-              alt={post.name}
-            />
+          <div className={anyUserFeedStyles["post-content-area"]}>
             <div className={anyUserFeedStyles["post-profile"]}>
-              {formatDate(post.date)}
+              <Link to={`/${post.parentId}`}>
+                <img
+                  src={post.profilePic ? post.profilePic : profileDefaultImage}
+                  alt={post.name}
+                />
+              </Link>
+              <div className={anyUserFeedStyles["post-date"]}>
+                {formatDate(post.date)}
+              </div>
+            </div>
+            <div className={anyUserFeedStyles["post-content"]}>
+              <Link to={`/${post.parentId}`}>
+                <h3>{post.name}</h3>
+              </Link>
+              <p>{post.content}</p>
             </div>
           </div>
-          <div className={anyUserFeedStyles["post-profile-content"]}>
-            <h3>{post.name}</h3>
-            <p>{post.content}</p>
-          </div>
+          <PostAnswerInputBox post={post} setReload={setReload} />
+          {post.answerPosts?.map((answerPost) => (
+            <div
+              key={answerPost._id}
+              className={anyUserFeedStyles["post-answer-area"]}
+            >
+              <div className={anyUserFeedStyles["post-answer"]}>
+                <Link to={`/${answerPost.ownerId}`}>
+                  <img
+                    className={
+                      anyUserFeedStyles["pixit-post-anwser-area-picture"]
+                    }
+                    src={
+                      answerPost.profilePic
+                        ? answerPost.profilePic
+                        : profileDefaultImage
+                    }
+                    alt={answerPost.name}
+                  />
+                </Link>
+                <p>{answerPost.content}</p>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>

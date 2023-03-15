@@ -16,6 +16,10 @@ header {
   gap: 10px;
 }
 
+.left-panel > a > img {
+  display: none;
+}
+
 .right-panel {
   padding-right: 20px;
   width: 50%;
@@ -30,13 +34,12 @@ header {
   cursor: pointer;
 }
 
-.left-panel > img {
-  display: none;
-}
-
 .credentials {
   display: flex;
   gap: 5px;
+}
+
+.credentials > a {
   color: whitesmoke;
 }
 
@@ -47,15 +50,15 @@ header {
     max-height: 70px;
   }
 
-  .right-panel > p {
-    font-size: 120%;
-  }
-
-  .left-panel > img {
+  .left-panel > a > img {
     display: block;
     width: 40px;
     height: 40px;
     border-radius: 3px;
+  }
+
+  .right-panel > p {
+    font-size: 120%;
   }
 
   .credentials {

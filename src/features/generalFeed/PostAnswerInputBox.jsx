@@ -1,10 +1,12 @@
 import React from "react";
 import axios from "axios";
+import { UserContext } from "../../pages/Home";
 import commonStyles from "../common/Common.module.css";
 import generalFeedStyles from "./GeneralFeed.module.css";
 import profileDefaultImage from "../../media/default.png";
 
 export default function PostAnswerInputBox(props) {
+  const { currentUser } = React.useContext(UserContext);
   const [newAnswer, setNewAnswer] = React.useState({
     content: "",
   });
@@ -14,8 +16,9 @@ export default function PostAnswerInputBox(props) {
     setNewAnswer({
       ...newAnswer,
       content: event.target.value,
-      profilePic: props.card.profilePic ? props.card.profilePic : "",
-      name: props.card.name,
+      profilePic: currentUser.profilePic ? currentUser.profilePic : "",
+      name: currentUser.name,
+      ownerId: currentUser._id,
     });
   };
 
@@ -51,8 +54,8 @@ export default function PostAnswerInputBox(props) {
             <img
               className={generalFeedStyles["pixit-post-anwser-area-picture"]}
               src={
-                props.card.profilePic
-                  ? props.card.profilePic
+                currentUser.profilePic
+                  ? currentUser.profilePic
                   : profileDefaultImage
               }
               alt={props.post.name}
@@ -78,8 +81,8 @@ export default function PostAnswerInputBox(props) {
             <img
               className={generalFeedStyles["post-anwser-area-picture"]}
               src={
-                props.card.profilePic
-                  ? props.card.profilePic
+                currentUser.profilePic
+                  ? currentUser.profilePic
                   : profileDefaultImage
               }
               alt={props.post.name}

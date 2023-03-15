@@ -12,7 +12,9 @@ import penhasco from "../../media/randLoginImages/Penhasco.jpg";
 import logo from "../../media/alphalogo.png";
 
 export default function LeftPanel() {
-  const random = () => {
+  const [randomImage, setRandomImage] = React.useState();
+
+  React.useEffect(() => {
     const images = [
       asian,
       bliss,
@@ -24,15 +26,15 @@ export default function LeftPanel() {
       sin,
       penhasco,
     ];
-    return images[Math.floor(Math.random() * images.length)];
-  };
+    setRandomImage(images[Math.floor(Math.random() * images.length)]);
+  }, []);
 
   return (
     <div className={loginStyles["left-panel"]}>
       <img
         className={loginStyles["random-images"]}
-        src={random()}
-        alt={random()}
+        src={randomImage}
+        alt="PixIt!"
       />
       <img className={loginStyles["logo"]} src={logo} alt={logo} />
     </div>

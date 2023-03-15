@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import generalFeedStyles from "./GeneralFeed.module.css";
 import PostInputBox from "./PostInputBox";
@@ -6,7 +7,7 @@ import PostAnswerInputBox from "./PostAnswerInputBox";
 import formatDate from "../components/formatDate";
 import profileDefaultImage from "../../media/default.png";
 
-export default function GeneralFeed(props) {
+export default function GeneralFeed() {
   const [feed, setFeed] = React.useState({
     data: [
       {
@@ -36,11 +37,15 @@ export default function GeneralFeed(props) {
       {post.image ? (
         <div className={generalFeedStyles["pixit-post"]}>
           <div className={generalFeedStyles["pixit-post-profile"]}>
-            <img
-              src={post.profilePic ? post.profilePic : profileDefaultImage}
-              alt={post.name}
-            />
-            <h3>{post.name}</h3>
+            <Link to={`/${post.parentId}`}>
+              <img
+                src={post.profilePic ? post.profilePic : profileDefaultImage}
+                alt={post.name}
+              />
+            </Link>
+            <Link to={`/${post.parentId}`}>
+              <h3>{post.name}</h3>
+            </Link>
           </div>
           <div className={generalFeedStyles["pixit-post-content"]}>
             <div className={generalFeedStyles["pixit-post-image-div"]}>
@@ -57,28 +62,26 @@ export default function GeneralFeed(props) {
               </div>
             </div>
           </div>
-          <PostAnswerInputBox
-            post={post}
-            setReload={setReload}
-            card={props.card}
-          />
+          <PostAnswerInputBox post={post} setReload={setReload} />
           {post.answerPosts?.map((answerPost) => (
             <div
               key={answerPost._id}
               className={generalFeedStyles["pixit-post-answer-area"]}
             >
               <div className={generalFeedStyles["pixit-post-answer"]}>
-                <img
-                  className={
-                    generalFeedStyles["pixit-post-anwser-area-picture"]
-                  }
-                  src={
-                    answerPost.profilePic
-                      ? answerPost.profilePic
-                      : profileDefaultImage
-                  }
-                  alt={answerPost.name}
-                />
+                <Link to={`/${answerPost.ownerId}`}>
+                  <img
+                    className={
+                      generalFeedStyles["pixit-post-anwser-area-picture"]
+                    }
+                    src={
+                      answerPost.profilePic
+                        ? answerPost.profilePic
+                        : profileDefaultImage
+                    }
+                    alt={answerPost.name}
+                  />
+                </Link>
                 <p>{answerPost.content}</p>
               </div>
             </div>
@@ -89,41 +92,43 @@ export default function GeneralFeed(props) {
         <div key={post._id} className={generalFeedStyles["post"]}>
           <div className={generalFeedStyles["post-content-area"]}>
             <div className={generalFeedStyles["post-profile"]}>
-              <img
-                src={post.profilePic ? post.profilePic : profileDefaultImage}
-                alt={post.name}
-              />
+              <Link to={`/${post.parentId}`}>
+                <img
+                  src={post.profilePic ? post.profilePic : profileDefaultImage}
+                  alt={post.name}
+                />
+              </Link>
               <div className={generalFeedStyles["post-date"]}>
                 {formatDate(post.date)}
               </div>
             </div>
             <div className={generalFeedStyles["post-content"]}>
-              <h3>{post.name}</h3>
+              <Link to={`/${post.parentId}`}>
+                <h3>{post.name}</h3>
+              </Link>
               <p>{post.content}</p>
             </div>
           </div>
-          <PostAnswerInputBox
-            post={post}
-            setReload={setReload}
-            card={props.card}
-          />
+          <PostAnswerInputBox post={post} setReload={setReload} />
           {post.answerPosts?.map((answerPost) => (
             <div
               key={answerPost._id}
               className={generalFeedStyles["post-answer-area"]}
             >
               <div className={generalFeedStyles["post-answer"]}>
-                <img
-                  className={
-                    generalFeedStyles["pixit-post-anwser-area-picture"]
-                  }
-                  src={
-                    answerPost.profilePic
-                      ? answerPost.profilePic
-                      : profileDefaultImage
-                  }
-                  alt={answerPost.name}
-                />
+                <Link to={`/${answerPost.ownerId}`}>
+                  <img
+                    className={
+                      generalFeedStyles["pixit-post-anwser-area-picture"]
+                    }
+                    src={
+                      answerPost.profilePic
+                        ? answerPost.profilePic
+                        : profileDefaultImage
+                    }
+                    alt={answerPost.name}
+                  />
+                </Link>
                 <p>{answerPost.content}</p>
               </div>
             </div>
