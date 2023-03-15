@@ -1,8 +1,10 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import anyUserFeedStyles from "../generalFeed/GeneralFeed.module.css";
+import GeneralFeedStyles from "../generalFeed/GeneralFeed.module.css";
+import AnyUserFeedStyles from "./AnyUserFeed.module.css";
 import PostAnswerInputBox from "../generalFeed/PostAnswerInputBox";
+import FollowButton from "../components/FollowButton";
 import formatDate from "../components/formatDate";
 import profileDefaultImage from "../../media/default.png";
 
@@ -19,8 +21,14 @@ export default function AnyUserFeed() {
       },
     ],
   });
-  const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
+  const [anyUser, setAnyUser] = React.useState({
+    id: "",
+    name: "",
+    surname: "",
+    profilePic: "",
+  });
   const [reload, setReload] = React.useState(false);
+  const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
 
   React.useEffect(() => {
     axios
@@ -34,32 +42,34 @@ export default function AnyUserFeed() {
       .catch((error) => error.message);
   }, [reload, authHeader, idRouterParam]);
 
+  React.useEffect(() => {
+    axios
+      .get("/users/read/" + idRouterParam.userId, {
+        headers: { Authorization: authHeader },
+      })
+      .then((res) => {
+        setAnyUser(res.data);
+      })
+      .catch((error) => error.message);
+  }, [authHeader, idRouterParam]);
+
+  console.log(reload);
+
   const renderedPost = feed.data.map((post) => (
     <div key={post._id}>
       {post.image ? (
-        <div className={anyUserFeedStyles["pixit-post"]}>
-          <div className={anyUserFeedStyles["pixit-post-profile"]}>
-            <Link to={`/${post.parentId}`}>
+        <div className={GeneralFeedStyles["pixit-post"]}>
+          <div className={GeneralFeedStyles["pixit-post-content"]}>
+            <div className={GeneralFeedStyles["pixit-post-image-div"]}>
               <img
-                src={post.profilePic ? post.profilePic : profileDefaultImage}
-                alt={post.name}
-              />
-            </Link>
-            <Link to={`/${post.parentId}`}>
-              <h3>{post.name}</h3>
-            </Link>
-          </div>
-          <div className={anyUserFeedStyles["pixit-post-content"]}>
-            <div className={anyUserFeedStyles["pixit-post-image-div"]}>
-              <img
-                className={anyUserFeedStyles["pixit-post-image"]}
+                className={GeneralFeedStyles["pixit-post-image"]}
                 src={post.image}
                 alt={post.image}
               />
             </div>
-            <div className={anyUserFeedStyles["pixit-post-text-content"]}>
+            <div className={GeneralFeedStyles["pixit-post-text-content"]}>
               <p>{post.content}</p>
-              <div className={anyUserFeedStyles["post-date"]}>
+              <div className={GeneralFeedStyles["post-date"]}>
                 {formatDate(post.date)}
               </div>
             </div>
@@ -68,13 +78,13 @@ export default function AnyUserFeed() {
           {post.answerPosts?.map((answerPost) => (
             <div
               key={answerPost._id}
-              className={anyUserFeedStyles["pixit-post-answer-area"]}
+              className={GeneralFeedStyles["pixit-post-answer-area"]}
             >
-              <div className={anyUserFeedStyles["pixit-post-answer"]}>
-                <Link to={`/${answerPost.ownerId}`}>
+              <div className={GeneralFeedStyles["pixit-post-answer"]}>
+                <Link to={`/users/${answerPost.ownerId}`}>
                   <img
                     className={
-                      anyUserFeedStyles["pixit-post-anwser-area-picture"]
+                      GeneralFeedStyles["pixit-post-anwser-area-picture"]
                     }
                     src={
                       answerPost.profilePic
@@ -88,40 +98,30 @@ export default function AnyUserFeed() {
               </div>
             </div>
           ))}
-          <div className={anyUserFeedStyles["pixit-post-anwser-area-gambs"]} />
+          <div className={GeneralFeedStyles["pixit-post-anwser-area-gambs"]} />
         </div>
       ) : (
-        <div key={post._id} className={anyUserFeedStyles["post"]}>
-          <div className={anyUserFeedStyles["post-content-area"]}>
-            <div className={anyUserFeedStyles["post-profile"]}>
-              <Link to={`/${post.parentId}`}>
-                <img
-                  src={post.profilePic ? post.profilePic : profileDefaultImage}
-                  alt={post.name}
-                />
-              </Link>
-              <div className={anyUserFeedStyles["post-date"]}>
+        <div key={post._id} className={GeneralFeedStyles["post"]}>
+          <div className={GeneralFeedStyles["post-content-area"]}>
+            <div className={GeneralFeedStyles["post-profile"]}></div>
+            <div className={GeneralFeedStyles["post-content"]}>
+              <p>{post.content}</p>
+              <div className={GeneralFeedStyles["post-date"]}>
                 {formatDate(post.date)}
               </div>
-            </div>
-            <div className={anyUserFeedStyles["post-content"]}>
-              <Link to={`/${post.parentId}`}>
-                <h3>{post.name}</h3>
-              </Link>
-              <p>{post.content}</p>
             </div>
           </div>
           <PostAnswerInputBox post={post} setReload={setReload} />
           {post.answerPosts?.map((answerPost) => (
             <div
               key={answerPost._id}
-              className={anyUserFeedStyles["post-answer-area"]}
+              className={GeneralFeedStyles["post-answer-area"]}
             >
-              <div className={anyUserFeedStyles["post-answer"]}>
-                <Link to={`/${answerPost.ownerId}`}>
+              <div className={GeneralFeedStyles["post-answer"]}>
+                <Link to={`/users/${answerPost.ownerId}`}>
                   <img
                     className={
-                      anyUserFeedStyles["pixit-post-anwser-area-picture"]
+                      GeneralFeedStyles["pixit-post-anwser-area-picture"]
                     }
                     src={
                       answerPost.profilePic
@@ -139,5 +139,24 @@ export default function AnyUserFeed() {
       )}
     </div>
   ));
-  return <div className={anyUserFeedStyles["container"]}>{renderedPost}</div>;
+  return (
+    <div className={GeneralFeedStyles["container"]}>
+      <div className={AnyUserFeedStyles["profile-area"]}>
+        <div className={AnyUserFeedStyles["profile"]}>
+          <img src={anyUser.profilePic} alt={anyUser.profilePic} />
+          <div className={AnyUserFeedStyles["credentials"]}>
+            <h2>{anyUser.name}</h2>
+            <h2>{anyUser.surname}</h2>
+          </div>
+        </div>
+        <div className={AnyUserFeedStyles["button-area"]}>
+          <FollowButton
+            anyUser={idRouterParam}
+            setReload={setReload}
+          />
+        </div>
+      </div>
+      {renderedPost}
+    </div>
+  );
 }

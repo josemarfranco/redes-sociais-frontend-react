@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import cardsStyles from "./Cards.module.css";
 import profileDefaultImage from "../../media/default.png";
 
@@ -11,7 +12,6 @@ export default function Cards() {
         name: "",
         surname: "",
         profilePic: profileDefaultImage,
-        bio: "",
       },
     ],
   });
@@ -32,25 +32,22 @@ export default function Cards() {
     <div key={card._id} className={cardsStyles["card"]}>
       <div className={cardsStyles["card-id"]}>
         <div>
-          <img
-            className={cardsStyles["card-picture"]}
-            width="50"
-            height="50"
-            src={card.profilePic ? card.profilePic : profileDefaultImage}
-            alt="nome"
-          />
+          <Link to={`/users/${card._id}`}>
+            <img
+              className={cardsStyles["card-picture"]}
+              src={card.profilePic ? card.profilePic : profileDefaultImage}
+              alt={card.name}
+            />
+          </Link>
         </div>
         <div className={cardsStyles["card-name"]}>
-          <p>
-            <b>{card.name}</b>
-          </p>
-          <p>
-            <b>{card.surname}</b>
-          </p>
+          <Link to={`/users/${card._id}`}>
+            <h4>{card.name}</h4>
+          </Link>
+          <Link to={`/users/${card._id}`}>
+            <h4>{card.surname}</h4>
+          </Link>
         </div>
-      </div>
-      <div className={cardsStyles["card-bio"]}>
-        <p>{card.bio}</p>
       </div>
     </div>
   ));

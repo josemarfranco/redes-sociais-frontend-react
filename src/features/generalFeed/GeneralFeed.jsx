@@ -37,13 +37,13 @@ export default function GeneralFeed() {
       {post.image ? (
         <div className={generalFeedStyles["pixit-post"]}>
           <div className={generalFeedStyles["pixit-post-profile"]}>
-            <Link to={`/${post.parentId}`}>
+            <Link to={`/users/${post.parentId}`}>
               <img
                 src={post.profilePic ? post.profilePic : profileDefaultImage}
                 alt={post.name}
               />
             </Link>
-            <Link to={`/${post.parentId}`}>
+            <Link to={`/users/${post.parentId}`}>
               <h3>{post.name}</h3>
             </Link>
           </div>
@@ -69,7 +69,7 @@ export default function GeneralFeed() {
               className={generalFeedStyles["pixit-post-answer-area"]}
             >
               <div className={generalFeedStyles["pixit-post-answer"]}>
-                <Link to={`/${answerPost.ownerId}`}>
+                <Link to={`/users/${answerPost.ownerId}`}>
                   <img
                     className={
                       generalFeedStyles["pixit-post-anwser-area-picture"]
@@ -92,7 +92,7 @@ export default function GeneralFeed() {
         <div key={post._id} className={generalFeedStyles["post"]}>
           <div className={generalFeedStyles["post-content-area"]}>
             <div className={generalFeedStyles["post-profile"]}>
-              <Link to={`/${post.parentId}`}>
+              <Link to={`/users/${post.parentId}`}>
                 <img
                   src={post.profilePic ? post.profilePic : profileDefaultImage}
                   alt={post.name}
@@ -103,7 +103,7 @@ export default function GeneralFeed() {
               </div>
             </div>
             <div className={generalFeedStyles["post-content"]}>
-              <Link to={`/${post.parentId}`}>
+              <Link to={`/users/${post.parentId}`}>
                 <h3>{post.name}</h3>
               </Link>
               <p>{post.content}</p>
@@ -116,7 +116,7 @@ export default function GeneralFeed() {
               className={generalFeedStyles["post-answer-area"]}
             >
               <div className={generalFeedStyles["post-answer"]}>
-                <Link to={`/${answerPost.ownerId}`}>
+                <Link to={`/users/${answerPost.ownerId}`}>
                   <img
                     className={
                       generalFeedStyles["pixit-post-anwser-area-picture"]

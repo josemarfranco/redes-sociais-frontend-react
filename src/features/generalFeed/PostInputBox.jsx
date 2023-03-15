@@ -66,7 +66,7 @@ export default function PostInputBox(props) {
       <div className={generalFeedStyles["post-input-button-area"]}>
         {picturePreview ? (
           <button
-            className={commonStyles["deny-button"]}
+            className={commonStyles["standard-deny-button"]}
             type="submit"
             onClick={cancelImagePost}
           >

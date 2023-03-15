@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../pages/Home";
 import profileStyles from "./Profile.module.css";
 
@@ -7,14 +8,24 @@ export default function Profile() {
 
   return (
     <div className={profileStyles["container"]}>
-      <img
-        className={profileStyles["picture"]}
-        width="200"
-        height="200"
-        src={currentUser.profilePic}
-        alt={currentUser.name}
-      />
-      <div className={profileStyles["panel"]}></div>
+      <div className={profileStyles["panel"]}>
+        <div className={profileStyles["panel-item"]}>
+          <p>Seguindo</p>
+          <p>{currentUser.friendsLen}</p>
+        </div>
+        <div className={profileStyles["panel-item"]}>
+          <p>Postagens</p>
+          <p>{currentUser.postsLen}</p>
+        </div>
+      </div>
+      <div className={profileStyles["links"]}>
+        <p>
+          <Link to={`/users/${currentUser._id}`}>Ver meu Perfil</Link>
+        </p>
+        <p>
+          <Link to="/logout">Sair</Link>
+        </p>
+      </div>
     </div>
   );
 }

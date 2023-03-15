@@ -78,7 +78,7 @@ export default function Register() {
             <div className={registerStyles["form-field"]}>
               {picturePreview.filePath !== defaultImage ? (
                 <button
-                  className={commonStyles["deny-button"]}
+                  className={commonStyles["standard-deny-button"]}
                   type="button"
                   onClick={cancelImagePost}
                 >

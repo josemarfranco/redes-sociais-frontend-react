@@ -29,7 +29,7 @@ export default function App() {
             }
           />
           <Route
-            path="/:userId"
+            path="/users/:userId"
             element={
               <ProtectedRoute>
                 <AnyUserFeed />

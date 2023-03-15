@@ -15,6 +15,7 @@ export default function Home() {
     name: "",
     surname: "",
     profilePic: profileDefaultImage,
+    friends: [],
   });
   const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
 
@@ -29,6 +30,9 @@ export default function Home() {
           profilePic: res.data.profilePic
             ? res.data.profilePic
             : profileDefaultImage,
+          friends: res.data.friends,
+          friendsLen: res.data.friendsLen,
+          postsLen: res.data.postsLen,
         });
       })
       .catch((error) => {
@@ -37,7 +41,7 @@ export default function Home() {
   }, [authHeader]);
 
   return (
-    <UserContext.Provider value={{currentUser}}>
+    <UserContext.Provider value={{ currentUser }}>
       <div className={homeStyles["container"]}>
         <Header />
         <Profile />
