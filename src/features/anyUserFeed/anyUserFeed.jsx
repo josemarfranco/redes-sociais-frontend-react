@@ -1,14 +1,18 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../../pages/Home";
 import GeneralFeedStyles from "../generalFeed/GeneralFeed.module.css";
 import AnyUserFeedStyles from "./AnyUserFeed.module.css";
 import PostAnswerInputBox from "../generalFeed/PostAnswerInputBox";
+import PixitPostOptions from "../postOptions/PixitPostOptions";
+import PostOptions from "../postOptions/PostOptions";
 import FollowButton from "../components/FollowButton";
 import formatDate from "../components/formatDate";
 import profileDefaultImage from "../../media/default.png";
 
 export default function AnyUserFeed() {
+  const { currentUser } = React.useContext(UserContext);
   const idRouterParam = useParams();
   const [feed, setFeed] = React.useState({
     data: [
@@ -57,6 +61,9 @@ export default function AnyUserFeed() {
     <div key={post._id}>
       {post.image ? (
         <div className={GeneralFeedStyles["pixit-post"]}>
+          {post.parentId === currentUser._id ? (
+            <PixitPostOptions post={post} setReload={setReload} />
+          ) : null}
           <div className={GeneralFeedStyles["pixit-post-content"]}>
             <div className={GeneralFeedStyles["pixit-post-image-div"]}>
               <img
@@ -105,6 +112,9 @@ export default function AnyUserFeed() {
         </div>
       ) : (
         <div key={post._id} className={GeneralFeedStyles["post"]}>
+          {post.parentId === currentUser._id ? (
+            <PostOptions post={post} setReload={setReload} />
+          ) : null}
           <div className={GeneralFeedStyles["post-anyuser-content-area"]}>
             <div className={GeneralFeedStyles["post-profile"]}></div>
             <div className={GeneralFeedStyles["post-content"]}>

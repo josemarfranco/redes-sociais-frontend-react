@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../../pages/Home";
 import generalFeedStyles from "./GeneralFeed.module.css";
 import PostInputBox from "./PostInputBox";
 import PostAnswerInputBox from "./PostAnswerInputBox";
+import PixitPostOptions from "../postOptions/PixitPostOptions";
+import PostOptions from "../postOptions/PostOptions";
 import formatDate from "../components/formatDate";
 import profileDefaultImage from "../../media/default.png";
 
 export default function GeneralFeed() {
+  const { currentUser } = React.useContext(UserContext);
   const [feed, setFeed] = React.useState({
     data: [
       {
@@ -36,6 +40,9 @@ export default function GeneralFeed() {
     <div key={post._id}>
       {post.image ? (
         <div className={generalFeedStyles["pixit-post"]}>
+          {post.parentId === currentUser._id ? (
+            <PixitPostOptions post={post} setReload={setReload} />
+          ) : null}
           <div className={generalFeedStyles["pixit-post-profile"]}>
             <Link to={`/users/${post.parentId}`}>
               <img
@@ -95,6 +102,9 @@ export default function GeneralFeed() {
         </div>
       ) : (
         <div key={post._id} className={generalFeedStyles["post"]}>
+          {post.parentId === currentUser._id ? (
+            <PostOptions post={post} setReload={setReload} />
+          ) : null}
           <div className={generalFeedStyles["post-content-area"]}>
             <div className={generalFeedStyles["post-profile"]}>
               <Link to={`/users/${post.parentId}`}>
@@ -108,9 +118,9 @@ export default function GeneralFeed() {
               </div>
             </div>
             <div className={generalFeedStyles["post-content"]}>
-              <Link to={`/users/${post.parentId}`}>
-                <h3>{post.name}</h3>
-              </Link>
+              <h3>
+                <Link to={`/users/${post.parentId}`}>{post.name}</Link>
+              </h3>
               <p>{post.content}</p>
             </div>
           </div>

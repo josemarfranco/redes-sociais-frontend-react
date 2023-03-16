@@ -1,5 +1,5 @@
 .container {
-  padding: 70px 20px;
+  padding: 90px 20px;
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@
   color: black;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 740px) {
   .container {
     display: none;
   }
