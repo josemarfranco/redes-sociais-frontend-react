@@ -28,8 +28,8 @@ export default function Login() {
         localStorage.setItem("pixit", res.data.jwt);
         navigate("/");
       })
-      .catch((error) => {
-        alert(error.message);
+      .catch((err) => {
+        alert(err.response.data.message);
       });
   };
 

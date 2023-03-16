@@ -29,7 +29,7 @@ export default function GeneralFeed() {
         setFeed(res);
         setReload(false);
       })
-      .catch((error) => error.message);
+      .catch((err) => alert(err.response.data.message));
   }, [reload, authHeader]);
 
   const renderedPost = feed.data.map((post) => (
@@ -57,12 +57,11 @@ export default function GeneralFeed() {
             </div>
             <div className={generalFeedStyles["pixit-post-text-content"]}>
               <p>{post.content}</p>
-              <div className={generalFeedStyles["post-date"]}>
+              <div className={generalFeedStyles["post-answer-date"]}>
                 {formatDate(post.date)}
               </div>
             </div>
           </div>
-          <PostAnswerInputBox post={post} setReload={setReload} />
           {post.answerPosts?.map((answerPost) => (
             <div
               key={answerPost._id}
@@ -82,10 +81,16 @@ export default function GeneralFeed() {
                     alt={answerPost.name}
                   />
                 </Link>
-                <p>{answerPost.content}</p>
+                <div className={generalFeedStyles["post-answer-content-area"]}>
+                  <p>{answerPost.content}</p>
+                  <div className={generalFeedStyles["post-answer-date"]}>
+                    {formatDate(answerPost.date)}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
+          <PostAnswerInputBox post={post} setReload={setReload} />
           <div className={generalFeedStyles["pixit-post-anwser-area-gambs"]} />
         </div>
       ) : (
@@ -109,7 +114,6 @@ export default function GeneralFeed() {
               <p>{post.content}</p>
             </div>
           </div>
-          <PostAnswerInputBox post={post} setReload={setReload} />
           {post.answerPosts?.map((answerPost) => (
             <div
               key={answerPost._id}
@@ -129,10 +133,16 @@ export default function GeneralFeed() {
                     alt={answerPost.name}
                   />
                 </Link>
-                <p>{answerPost.content}</p>
+                <div className={generalFeedStyles["post-answer-content-area"]}>
+                  <p>{answerPost.content}</p>
+                  <div className={generalFeedStyles["post-answer-date"]}>
+                    {formatDate(answerPost.date)}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
+          <PostAnswerInputBox post={post} setReload={setReload} />
         </div>
       )}
     </div>

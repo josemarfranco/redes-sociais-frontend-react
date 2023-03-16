@@ -37,8 +37,8 @@ export default function Home() {
         });
         setReloadUser(false);
       })
-      .catch((error) => {
-        alert(error.message);
+      .catch((err) => {
+        alert(err.response.data.message);
       });
   }, [reloadUser, authHeader]);
 

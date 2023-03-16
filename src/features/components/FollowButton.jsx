@@ -21,7 +21,7 @@ export default function FollowButton(props) {
         setReloadUser(true);
       })
       .catch((err) => {
-        console.error(err);
+        alert(err.response.data.message);
       });
   };
 
@@ -39,7 +39,7 @@ export default function FollowButton(props) {
         setReloadUser(true);
       })
       .catch((err) => {
-        console.error(err);
+        alert(err.response.data.message);
       });
   };
 

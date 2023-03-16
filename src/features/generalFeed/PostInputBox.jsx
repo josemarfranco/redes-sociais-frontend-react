@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import commonStyles from "../../features/common/Common.module.css";
+import RandomTitle from "../components/RandomTitle";
 import generalFeedStyles from "./GeneralFeed.module.css";
 
 export default function PostInputBox(props) {
@@ -10,7 +11,9 @@ export default function PostInputBox(props) {
     content: "",
   });
   const [picturePreview, setPicturePreview] = React.useState(null);
+  const [focus, setFocus] = React.useState(false);
   const authHeader = `Bearer ${localStorage.getItem("pixit")}`;
+  const maxLength = 300;
 
   const handleChange = (event) => {
     setNewPost({ ...newPost, content: event.target.value });
@@ -32,7 +35,7 @@ export default function PostInputBox(props) {
         setPicturePreview(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        alert(err.response.data.message);
       });
   };
 
@@ -49,10 +52,15 @@ export default function PostInputBox(props) {
         });
         setPicturePreview("");
         props.setReload(true);
+        setFocus(false);
       })
       .catch((err) => {
-        console.error(err);
+        alert(err.response.data.message);
       });
+  };
+
+  const ifFocused = () => {
+    setFocus(true);
   };
 
   const cancelImagePost = () => {
@@ -89,8 +97,11 @@ export default function PostInputBox(props) {
     <form
       className={generalFeedStyles["post-input-box"]}
       onSubmit={handleSubmit}
+      autoComplete="off"
     >
-      <label htmlFor="content">O que acontece?</label>
+      <label htmlFor="content">
+        <RandomTitle />
+      </label>
       {picturePreview ? (
         <div className={generalFeedStyles["post-input-picturePreview-area"]}>
           <img
@@ -106,8 +117,10 @@ export default function PostInputBox(props) {
         type="text"
         value={newPost.content}
         onChange={handleChange}
+        onFocus={ifFocused}
+        maxLength={maxLength}
       />
-      {showSubmitControls()}
+      {focus ? showSubmitControls() : null}
     </form>
   );
 }

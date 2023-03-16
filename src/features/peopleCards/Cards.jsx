@@ -23,8 +23,8 @@ export default function Cards() {
       .then((res) => {
         setCards(res);
       })
-      .catch((error) => {
-        alert(error.message);
+      .catch((err) => {
+        alert(err.response.data.message);
       });
   }, []);
 
@@ -52,5 +52,7 @@ export default function Cards() {
     </div>
   ));
 
-  return <div className={cardsStyles["container"]}>{renderedCard}</div>;
+  return <div className={cardsStyles["container"]}>
+    <h3>Sugestões do PixIt</h3>
+    {renderedCard}</div>;
 }

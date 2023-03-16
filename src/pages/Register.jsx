@@ -45,7 +45,7 @@ export default function Register() {
         setPicturePreview(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        alert(err.response.data.message);
       });
   };
 
@@ -106,6 +106,7 @@ export default function Register() {
               className={commonStyles["standard-input"]}
               name="email"
               type="text"
+              maxLength="100"
               value={newUser.email}
               onChange={handleChange}
             />
@@ -116,6 +117,7 @@ export default function Register() {
               className={commonStyles["standard-input"]}
               name="name"
               type="text"
+              maxLength="30"
               value={newUser.name}
               onChange={handleChange}
             />
@@ -126,6 +128,7 @@ export default function Register() {
               className={commonStyles["standard-input"]}
               name="surname"
               type="text"
+              maxLength="30"
               value={newUser.surname}
               onChange={handleChange}
             />
@@ -148,6 +151,7 @@ export default function Register() {
               className={commonStyles["standard-input"]}
               name="password"
               type="password"
+              maxLength="100"
               value={newUser.password}
               onChange={handleChange}
             />
@@ -158,6 +162,7 @@ export default function Register() {
               className={commonStyles["standard-input"]}
               name="passwordConf"
               type="password"
+              maxLength="100"
               value={newUser.passwordConf}
               onChange={handleChange}
             />

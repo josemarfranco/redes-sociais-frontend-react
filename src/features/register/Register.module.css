@@ -45,13 +45,17 @@
 }
 
 @media only screen and (max-width: 600px) {
-
   .right-panel {
     width: 100%;
     height: 100%;
     background-color: #3c4b5a;
+    color: whitesmoke;
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  .form-button-area > a {
+    color: whitesmoke;
   }
 }

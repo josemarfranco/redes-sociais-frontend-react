@@ -39,7 +39,7 @@ export default function AnyUserFeed() {
         setFeed(res);
         setReload(false);
       })
-      .catch((error) => error.message);
+      .catch((err) => alert(err.response.data.message));
   }, [reload, authHeader, idRouterParam]);
 
   React.useEffect(() => {
@@ -50,7 +50,7 @@ export default function AnyUserFeed() {
       .then((res) => {
         setAnyUser(res.data);
       })
-      .catch((error) => error.message);
+      .catch((err) => alert(err.response.data.message));
   }, [authHeader, idRouterParam]);
 
   const renderedPost = feed.data.map((post) => (
@@ -67,12 +67,11 @@ export default function AnyUserFeed() {
             </div>
             <div className={GeneralFeedStyles["pixit-post-text-content"]}>
               <p>{post.content}</p>
-              <div className={GeneralFeedStyles["post-date"]}>
+              <div className={GeneralFeedStyles["post-answer-date"]}>
                 {formatDate(post.date)}
               </div>
             </div>
           </div>
-          <PostAnswerInputBox post={post} setReload={setReload} />
           {post.answerPosts?.map((answerPost) => (
             <div
               key={answerPost._id}
@@ -92,24 +91,29 @@ export default function AnyUserFeed() {
                     alt={answerPost.name}
                   />
                 </Link>
-                <p>{answerPost.content}</p>
+                <div className={GeneralFeedStyles["post-answer-content-area"]}>
+                  <p>{answerPost.content}</p>
+                  <div className={GeneralFeedStyles["post-answer-date"]}>
+                    {formatDate(answerPost.date)}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
+          <PostAnswerInputBox post={post} setReload={setReload} />
           <div className={GeneralFeedStyles["pixit-post-anwser-area-gambs"]} />
         </div>
       ) : (
         <div key={post._id} className={GeneralFeedStyles["post"]}>
-          <div className={GeneralFeedStyles["post-content-area"]}>
+          <div className={GeneralFeedStyles["post-anyuser-content-area"]}>
             <div className={GeneralFeedStyles["post-profile"]}></div>
             <div className={GeneralFeedStyles["post-content"]}>
               <p>{post.content}</p>
-              <div className={GeneralFeedStyles["post-date"]}>
+              <div className={GeneralFeedStyles["post-answer-date"]}>
                 {formatDate(post.date)}
               </div>
             </div>
           </div>
-          <PostAnswerInputBox post={post} setReload={setReload} />
           {post.answerPosts?.map((answerPost) => (
             <div
               key={answerPost._id}
@@ -129,10 +133,16 @@ export default function AnyUserFeed() {
                     alt={answerPost.name}
                   />
                 </Link>
-                <p>{answerPost.content}</p>
+                <div className={GeneralFeedStyles["post-answer-content-area"]}>
+                  <p>{answerPost.content}</p>
+                  <div className={GeneralFeedStyles["post-answer-date"]}>
+                    {formatDate(answerPost.date)}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
+          <PostAnswerInputBox post={post} setReload={setReload} />
         </div>
       )}
     </div>

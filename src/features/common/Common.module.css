@@ -35,6 +35,10 @@ small {
   font-weight: bold;
 }
 
+::placeholder {
+  color: lightgray;
+}
+
 img {
   object-fit: cover;
   display: block;

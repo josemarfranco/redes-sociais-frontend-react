@@ -5,16 +5,16 @@ export default function formatDate(date) {
     formattedDate.getMonth(),
     formattedDate.getFullYear(),
     formattedDate.getHours(),
-    formattedDate.getMinutes(),
+    (formattedDate.getMinutes() < 10 ? "0" : "") + formattedDate.getMinutes(),
   ];
   return (
-    <div>
-      <small>
+    <>
+      <p>
         {day}/{month}/{year}
-      </small>{" "}
-      <small>
-        ({hours}:{minutes})
-      </small>
-    </div>
+      </p>
+      <p>
+        {hours}:{minutes}
+      </p>
+    </>
   );
 }
